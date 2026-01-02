@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useCallback, memo, useRef } from 'react';
 import { AppView, Hymn, FlipcardContent, Devotional, ChurchEvent } from './types';
 import { 
@@ -402,14 +401,44 @@ export default function App() {
     if (!q.trim() || loading) return;
     setLoading(true);
     try {
-      const results = await searchBibleKeywords(q);
-      setBibleVerses(results);
+      // Sincroniza a Bíblia completa do GitHub caso não esteja em cache
+      if (!fullBibleRef.current) {
+        const fullRes = await fetch(`${GITHUB_DB.BIBLE_BASE}ARC.json`);
+        if (fullRes.ok) {
+          fullBibleRef.current = await fullRes.json();
+        } else {
+          throw new Error("Erro ao baixar Bíblia do GitHub");
+        }
+      }
+
+      const queryTerm = q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const results: any[] = [];
+      
+      // Busca local nos dados do GitHub
+      fullBibleRef.current.forEach((book: any) => {
+        book.chapters.forEach((chapterVerses: string[], cIdx: number) => {
+          chapterVerses.forEach((vText: string, vIdx: number) => {
+            const normalizedText = vText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if (normalizedText.includes(queryTerm)) {
+              results.push({
+                book: book.name,
+                chapter: cIdx + 1,
+                verse: vIdx + 1,
+                text: vText
+              });
+            }
+          });
+        });
+      });
+
+      setBibleVerses(results.slice(0, 150)); // Limita resultados para performance
       setIsShowingSearchResults(true);
       setSelectedBook(null);
       setSelectedChapter(null);
       setSelectedVerse(null);
     } catch (e) { 
-      setError("Erro na busca."); 
+      console.error("Erro na busca GitHub:", e);
+      setError("Não foi possível realizar a busca no GitHub."); 
     } finally { 
       setLoading(false); 
     }
