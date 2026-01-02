@@ -240,7 +240,7 @@ export default function App() {
 
   // Lógica de compartilhamento de devocional
   const handleShareDevotional = (dev: Devotional) => {
-    const shareText = `✨ *Devocional Diária - IP São Caetano* ✨\n\n` +
+    const shareText = `✨ *Devocional Diária - IPSCS* ✨\n\n` +
                       `📅 *${dev.day} de ${dev.month} de ${dev.year}*\n` +
                       `📖 *${dev.title.toUpperCase()}*\n\n` +
                       `"${dev.verse}"\n— _${dev.reference}_\n\n` +
@@ -442,7 +442,7 @@ export default function App() {
       
       {/* Mobile Header */}
       <header className="lg:hidden flex items-center justify-between p-4 border-b bg-ipbGreen-500 text-white sticky top-0 z-[200]">
-        <h1 className="font-black text-lg tracking-tighter">IP São Caetano</h1>
+        <h1 className="font-black text-lg tracking-tighter">IPSCS</h1>
         <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2"><Menu size={24} /></button>
       </header>
 
@@ -469,7 +469,7 @@ export default function App() {
       {/* Sidebar Desktop */}
       <aside className={`fixed top-0 left-0 h-full w-72 bg-ipbGreen-500 text-white/80 z-50 p-8 shadow-2xl transition-transform duration-500 hidden lg:flex flex-col ${(!settings.focusMode || activeView !== 'bible') ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="mb-10 px-6">
-           <h1 className="text-white font-black text-xl tracking-tighter"> </h1>
+           <h1 className="text-white font-black text-xl tracking-tighter">IPSCS</h1>
            <p className="text-[9px] text-amber-500 font-bold uppercase tracking-[0.3em] mt-2"> </p>
         </div>
         <nav className="flex-1 space-y-2">
@@ -498,18 +498,8 @@ export default function App() {
               <section className="relative w-full h-80 rounded-[60px] overflow-hidden bg-ipbGreen-50 flex flex-col items-center justify-center text-center p-8 shadow-sm">
                 <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-ipbGreen-100/50 pointer-events-none"></div>
                 <span className="text-ipbGreen-600 font-black text-[10px] uppercase tracking-[0.5em] mb-4 relative z-10">IGREJA PRESBITERIANA DO BRASIL</span>
-                <h1 className="text-6xl md:text-8xl font-medium tracking-tighter uppercase relative z-10 text-ipbGreen-800 leading-[0.8]">IGREJA<br/>PRESBITERIANA</h1>
-                <h2 className="serif-italic text-5xl md:text-7xl text-amber-500 relative z-10 -mt-2">de São Caetano do Sul</h2>
-                <div className="flex gap-12 mt-10 relative z-10">
-                   <div className="flex flex-col items-center gap-2">
-                      <div className="w-16 h-16 rounded-full bg-ipbGreen-500/10 flex items-center justify-center"><Library size={28} className="text-ipbGreen-600"/></div>
-                      <span className="text-[8px] font-black uppercase tracking-widest opacity-40">INSTITUCIONAL</span>
-                   </div>
-                   <div className="flex flex-col items-center gap-2">
-                      <div className="w-16 h-16 rounded-full bg-ipbGreen-500/10 flex items-center justify-center"><Heart size={28} className="text-ipbGreen-600"/></div>
-                      <span className="text-[8px] font-black uppercase tracking-widest opacity-40">MEMBRESIA</span>
-                   </div>
-                </div>
+                <h1 className="text-4xl md:text-6xl font-medium tracking-tighter uppercase relative z-10 text-ipbGreen-800 leading-[0.8]">IGREJA<br/>PRESBITERIANA</h1>
+                <h2 className="serif-italic text-3xl md:text-5xl text-amber-500 relative z-10 -mt-2">de São Caetano do Sul</h2>
               </section>
 
               {/* Grid Section - Ajustado para 2 colunas após remoção da Agenda */}
